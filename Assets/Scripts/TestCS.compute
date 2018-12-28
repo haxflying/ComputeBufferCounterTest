@@ -1,0 +1,14 @@
+﻿#pragma kernel CSMain
+
+RWStructuredBuffer<float> res;
+int width;
+int height;
+
+[numthreads(8,8,1)]
+void CSMain (uint3 id : SV_DispatchThreadID)
+{
+	int index = id.x + id.y * width;
+	uint count, stride;
+	res.GetDimensions(count, stride);
+	res[index] = res.IncrementCounter() / count;// (float)id.y / (float)height;
+}
