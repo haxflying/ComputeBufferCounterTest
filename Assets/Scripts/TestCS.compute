@@ -10,5 +10,6 @@ void CSMain (uint3 id : SV_DispatchThreadID)
 	int index = id.x + id.y * width;
 	uint count, stride;
 	res.GetDimensions(count, stride);
-	res[index] = res.IncrementCounter() / count;// (float)id.y / (float)height;
+	res[index] = 0.001 * res.IncrementCounter() / count;
+	//return value ++ every frame
 }
